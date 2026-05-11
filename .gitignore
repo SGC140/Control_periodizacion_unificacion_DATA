@@ -1,6 +1,5 @@
 credenciales.json 
 .env
-Procfile
 venv
 .vscode
 __pycache__
