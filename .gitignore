@@ -1,1 +1,7 @@
 credenciales.json 
+.env
+Procfile
+venv
+.vscode
+__pycache__
+desktop.ini
