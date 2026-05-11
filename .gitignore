@@ -1,6 +1,5 @@
 credenciales.json 
 .env
-venv
-.vscode
-__pycache__
-desktop.ini
+venv/
+.vscode/
+__pycache__/
