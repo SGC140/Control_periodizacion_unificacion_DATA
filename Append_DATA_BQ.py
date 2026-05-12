@@ -20,9 +20,12 @@ info_dataset = client_bq.list_tables(Dataset_ID)
 
 Lista_tablas = {}
 for tabla in info_dataset:
-    if str.lower('unificado') in str.lower(tabla.table_id) and not 'formacion' in str.lower(tabla.table_id): 
+    if str.lower('unificado') in str.lower(tabla.table_id) and not 'formacion' in str.lower(tabla.table_id) and not 'append' in str.lower(tabla.table_id): 
         from_table = f"{PROJECT_ID}.{DATA_SET}.{tabla.table_id}"
         Lista_tablas[from_table] = tabla.table_id
+
+print(Lista_tablas)
+
 
 Fecha = date.today()
 

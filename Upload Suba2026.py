@@ -3,15 +3,20 @@ from google.oauth2.service_account import Credentials
 import pandas as pd
 from google.cloud import bigquery
 from pathlib import Path
+import dotenv
+from dotenv import load_dotenv
+import os
 
 # ==============================
 # CONFIGURACIÓN
 # ==============================
 
-SPREADSHEET_ID = "14FAmBuo9RN642X8BQk2RT7j509CVY6tV8rWEbI-WbDU"
+load_dotenv(override=True)
 
-PROJECT_ID = "sustained-edge-465417-m3"
-DATASET_ID = "EFE_2026"
+SPREADSHEET_ID = os.getenv("Sheets_Seguimiento_Suba")
+
+PROJECT_ID = os.getenv("PROJECT_ID")
+DATASET_ID = os.getenv("DATA_SET")
 TABLE_ID   = "SUBA_2026_V2"
 
 CREDENTIALS_FILE = "credenciales.json"

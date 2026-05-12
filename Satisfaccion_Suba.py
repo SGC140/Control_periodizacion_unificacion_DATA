@@ -10,7 +10,7 @@ load_dotenv()
 load_dotenv(override=True)
 Satisfaccion_suba = os.getenv("Sheets_Satisfaccion_Suba")
 PROJECT_ID = os.getenv("PROJECT_ID")
-DATASET_ID = "EFE_2026"
+DATASET_ID = os.getenv("DATA_SET")
 TABLE_ID   =  "Suba_2026_Satisfaccion"
 
 Credentials_File = "credenciales.json"

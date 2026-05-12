@@ -3,16 +3,20 @@ from google.oauth2.service_account import Credentials
 import pandas as pd
 from google.cloud import bigquery
 from pathlib import Path
-
+import dotenv
+from dotenv import load_dotenv
+import os
 # ==============================
 # CONFIGURACIÓN
 # ==============================
 
-SPREADSHEET_ID = "1zqDSWTc0iU9EFppUPXJgdfQNUG0E3LoVE3vvOr8X4FQ"
+load_dotenv(override=True)
+
+SPREADSHEET_ID = os.getenv("Sheets_Colsubsidio")
 RANGE = "A5:BP"
 
-PROJECT_ID = "sustained-edge-465417-m3"
-DATASET_ID = "EFE_2026"
+PROJECT_ID = os.getenv("PROJECT_ID")
+DATASET_ID = os.getenv("DATA_SET")
 TABLE_ID   = "COLSUBSIDIO_2026_V2"
 
 CREDENTIALS_FILE = "credenciales.json"
@@ -102,6 +106,7 @@ df = df.astype(str)
 print(f"✅ Filas finales: {len(df)}")
 print("🔎 Columnas:")
 df['proyecto'] = 'Colsubsidio 2026'
+df = df.drop(columns=['coincide_fecha_inicio'])
 print(df.columns.tolist())
 
 

@@ -3,16 +3,20 @@ from google.oauth2.service_account import Credentials
 import pandas as pd
 from google.cloud import bigquery
 from pathlib import Path
+import dotenv
+from dotenv import load_dotenv
+import os
 
 # ==============================
 # CONFIGURACIÓN
 # ==============================
+load_dotenv(override=True)
 
-SPREADSHEET_ID = "1INgwRBsVt2KDcS5xmOG6FGKModYTxBzCmwRgWsAPCRE"
+SPREADSHEET_ID = os.getenv("Data_suba_empleabilidad")
 RANGE = "A2:BE"
 
-PROJECT_ID = "sustained-edge-465417-m3"
-DATASET_ID = "EFE_2026"
+PROJECT_ID = os.getenv("PROJECT_ID")
+DATASET_ID = os.getenv("DATA_SET")
 TABLE_ID   = "SUBA_2026_Empleabilidad"
 
 CREDENTIALS_FILE = "credenciales.json"
@@ -135,7 +139,7 @@ print(f"📊 Columnas finales: {len(df.columns)}")
 # Convertir todo a string para evitar errores de schema
 df = df.astype(str)
 df["total_remisiones"].apply(pd.to_numeric, errors='coerce')
-df["total_contratación"].apply(pd.to_numeric, errors='coerce')
+df["total_contratacion"].apply(pd.to_numeric, errors='coerce')
 print(df["total_remisiones"])
 
 # ==============================

@@ -3,12 +3,17 @@ from google.oauth2.service_account import Credentials
 import pandas as pd
 from google.cloud import bigquery
 from pathlib import Path
+import dotenv
+from dotenv import load_dotenv
+import os
 
 # ==============================
 # CONFIGURACIÓN
 # ==============================
 
-SPREADSHEET_ID = "1zqDSWTc0iU9EFppUPXJgdfQNUG0E3LoVE3vvOr8X4FQ"
+load_dotenv(override=True)
+
+SPREADSHEET_ID = os.getenv("Sheets_Colsubsidio")
 
 PROJECT_ID = "sustained-edge-465417-m3"
 DATASET_ID = "EFE_2026"
