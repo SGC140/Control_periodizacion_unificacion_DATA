@@ -63,8 +63,6 @@ print(DF)
 pd.set_option('display.max_rows', None)
 print(pd.DataFrame(DF.columns))
 
-DF.to_csv("prueba_rápida")
-
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
