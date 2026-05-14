@@ -46,7 +46,7 @@ DF.columns = (DF.columns
               .str.replace(r"[^a-z0-9_#]", "", regex=True)              
               )
 
-DF = DF.iloc[:, 0:39]
+DF = DF.iloc[:, 0:47]
 DF = DF.drop_duplicates(DF.columns)
 
 Columnas_tipo_FLOAT64 = []

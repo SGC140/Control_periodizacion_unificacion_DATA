@@ -129,6 +129,7 @@ df = df.dropna(subset=['documento_de_identidad'])
 
 # Reemplazar nombres vacíos restantes
 df.columns = [col if col != "" else f"col_{i}" for i, col in enumerate(df.columns)]
+df = df.drop(columns=['correo_de_la_empresa_2', 'correo_de_la_empresa_3', 'requistos_2', 'correo_de_la_empresa_1'])
 
 print(f"📊 Columnas finales: {len(df.columns)}")
 
