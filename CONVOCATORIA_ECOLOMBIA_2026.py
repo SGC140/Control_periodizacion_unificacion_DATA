@@ -49,6 +49,9 @@ DF.columns = (DF.columns
 DF['fecha_de_matricula'] = pd.to_datetime(DF['fecha_de_matricula'])
 
 
+DF['fecha_induccion'] = pd.to_datetime(DF['fecha_induccion'])
+
+
 
 DF = DF.iloc[:, 0:49]
 DF['proyecto'] = "Ecolombia 2.0"
