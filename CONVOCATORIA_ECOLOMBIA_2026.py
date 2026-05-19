@@ -53,7 +53,7 @@ DF['fecha_induccion'] = pd.to_datetime(DF['fecha_induccion'])
 
 
 
-DF = DF.iloc[:, 0:49]
+DF = DF.iloc[:, 0:54]
 DF['proyecto'] = "Ecolombia 2.0"
 
 pd.set_option('display.max_rows', None)
