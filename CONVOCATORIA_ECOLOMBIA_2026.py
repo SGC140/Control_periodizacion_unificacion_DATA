@@ -46,13 +46,17 @@ DF.columns = (DF.columns
               .str.replace(r"[^a-z0-9_#]", "", regex=True)              
               )
 
+DF['fecha_de_matricula'] = pd.to_datetime(DF['fecha_de_matricula'])
+
+
 
 DF = DF.iloc[:, 0:49]
 DF['proyecto'] = "Ecolombia 2.0"
 
-pd.reset_option('display.max_rows')
+pd.set_option('display.max_rows', None)
 print(DF.info())
 print(DF)
+print(DF["fecha_de_matricula"])
 
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
