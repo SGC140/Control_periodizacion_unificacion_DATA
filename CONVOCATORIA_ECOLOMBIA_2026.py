@@ -46,11 +46,18 @@ DF.columns = (DF.columns
               .str.replace(r"[^a-z0-9_#]", "", regex=True)              
               )
 
-DF['fecha_de_matricula'] = pd.to_datetime(DF['fecha_de_matricula'])
 
 
-DF['fecha_induccion'] = pd.to_datetime(DF['fecha_induccion'])
+Col_string_to_date = []
+for columnas_fecha in DF.columns:
+    if 'fecha' in columnas_fecha:
+        Col_string_to_date.append(columnas_fecha)
+        DF[columnas_fecha] = pd.to_datetime(DF[columnas_fecha], dayfirst=True, errors='coerce') 
 
+        
+print(Col_string_to_date)
+
+print(DF[Col_string_to_date].head())
 
 
 DF = DF.iloc[:, 0:54]
