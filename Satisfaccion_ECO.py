@@ -49,9 +49,9 @@ DF.columns = (DF.columns
 DF = DF.drop_duplicates(DF.columns)
 
 
-DF = DF.iloc[:, 0:29]
+DF = DF.iloc[:, 0:32]
 DF['proyecto'] = "Ecolombia 2.0"
-
+print(DF.columns)
 
 print(DF.info())
 print(DF)
