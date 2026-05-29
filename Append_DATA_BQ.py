@@ -28,12 +28,17 @@ print(Lista_tablas)
 
 
 Fecha = date.today()
+Fecha_mensualizada = Fecha.strftime("%Y-%m")
+print(Fecha_mensualizada)
+
 
 
 for tabla, nombre in Lista_tablas.items():
     Table = client_bq.query(f"Select * FROM `{tabla}`").to_dataframe()
     df = pd.DataFrame(Table)
-    df['Fecha_Append'] = Fecha
+    df['Fecha_Append'] = Fecha_mensualizada
+    df['Fecha_Append'] = pd.to_datetime(df['Fecha_Append'])
+    df['Fecha_Append'] = df['Fecha_Append'].dt.strftime('%Y-%m')
     Tabla_destino = f"{PROJECT_ID}.{DATA_SET}.{nombre}_APPEND"
     job = client_bq.load_table_from_dataframe(
             df,
