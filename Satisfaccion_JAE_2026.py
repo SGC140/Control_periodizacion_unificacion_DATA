@@ -15,7 +15,6 @@ DATASET_ID = "EFE_2026"
 TABLE_ID   =  "Satisfaccion_JAE_2026"
 
 Credentials_File = "credenciales.json"
-
 scopes = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive"
@@ -33,7 +32,6 @@ DF = DF.loc[:, DF.columns != ""]
 
 DF = DF.replace(r'^\s*$', None, regex=True)
 DF = DF.where(pd.notnull(DF), None)
-
 DF = DF.dropna(subset=['Número de Documento'])
 
 DF.columns = (DF.columns
@@ -49,17 +47,13 @@ DF.columns = (DF.columns
 DF = DF.drop_duplicates(DF.columns)
 
 DF['proyecto'] = "Jóvenes a la E"
-
 print(DF.info())
-print(DF)
+print(DF.columns)
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
-
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
 
 from validacion_dataframes import validar_y_comparar
-
-print("Iniciando control de calidad de columnas")
 validar_y_comparar(Hoja_satisfaccion.title, DF, client_bq, table_ref)
 
 job = client_bq.load_table_from_dataframe(

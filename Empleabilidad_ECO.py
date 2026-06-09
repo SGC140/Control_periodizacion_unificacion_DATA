@@ -33,7 +33,6 @@ DF = DF.loc[:, DF.columns != ""]
 
 DF = DF.replace(r'^\s*$', None, regex=True)
 DF = DF.where(pd.notnull(DF), None)
-
 DF = DF.dropna(subset=['DOCUMENTO'])
 
 DF.columns = (DF.columns
@@ -47,33 +46,18 @@ DF.columns = (DF.columns
               )
 
 Columnas_innecesarias = ['fomacion_dual', 'meses_en_letras', 'meses_practica'] 
-
 DF = DF.drop(columns=Columnas_innecesarias)
-    
-
 DF = DF.iloc[:, 0:61]
-
 DF = DF.loc[:, ~DF.columns.duplicated()]
-
 DF['proyecto'] = "Ecolombia 2.0"
-
 DF["total_postulaciones"].apply(pd.to_numeric, errors = 'coerce')
-print(DF["total_postulaciones"])
 
-
-
-
-
-print(DF.info())
 print(DF.columns)
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
-
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
 
 from validacion_dataframes import validar_y_comparar
-
-print("Iniciando control de calidad de columnas")
 validar_y_comparar(Hoja_Empleabilidad.title, DF, client_bq, table_ref)
 
 job = client_bq.load_table_from_dataframe(

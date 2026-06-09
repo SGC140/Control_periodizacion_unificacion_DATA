@@ -50,11 +50,8 @@ columna_larga = DF.columns[DF.columns.str.contains('autorizo', case=False)][0]
 DF = DF.rename(columns={columna_larga: 'autorizacion_datos'})
 
 DF = DF.drop_duplicates(DF.columns)
-print(pd.DataFrame(DF.columns))
 DF['proyecto'] = 'Suba es Oportunidad'
 
-print(DF.info())
-print(DF)
 print(pd.DataFrame(DF.columns))
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
@@ -62,8 +59,6 @@ client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
 
 from validacion_dataframes import validar_y_comparar
-
-print("Iniciando control de calidad de columnas")
 validar_y_comparar(Hoja_satisfaccion.title, DF, client_bq, table_ref)
 
 job = client_bq.load_table_from_dataframe(

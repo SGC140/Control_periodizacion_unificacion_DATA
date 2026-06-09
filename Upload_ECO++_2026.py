@@ -60,18 +60,12 @@ DF[Columnas_numericas] = DF[Columnas_numericas].apply(pd.to_numeric, errors='coe
 
 DF['proyecto'] = "Ecolombia 2.0"
 
-print(DF.info(verbose=True, show_counts=True))
-print(DF)
-print(pd.DataFrame(DF.columns))
-print(DF.describe())
+print(DF.columns)
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
-
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
 
 from validacion_dataframes import validar_y_comparar
-
-print("Iniciando control de calidad de columnas")
 validar_y_comparar(Hoja_seguimiento.title, DF, client_bq, table_ref)
 
 job = client_bq.load_table_from_dataframe(

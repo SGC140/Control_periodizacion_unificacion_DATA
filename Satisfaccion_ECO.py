@@ -53,16 +53,11 @@ DF = DF.iloc[:, 0:32]
 DF['proyecto'] = "Ecolombia 2.0"
 print(DF.columns)
 
-print(DF.info())
-print(DF)
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
-
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
 
 from validacion_dataframes import validar_y_comparar
-
-print("Iniciando control de calidad de columnas")
 validar_y_comparar(Hoja_satisfaccion.title, DF, client_bq, table_ref)
 
 job = client_bq.load_table_from_dataframe(

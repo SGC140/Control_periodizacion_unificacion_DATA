@@ -61,11 +61,8 @@ df.columns = (
 
 df = df.loc[:, ~df.columns.duplicated()]
 
-print(f"✅ Filas finales: {len(df)}")
-print("🔎 Columnas:")
+print(f" Número de filas: {len(df)}")
 print(df.columns.tolist())
-
-print("🔎 Muestra de datos:")
 print(df.head())
 
 client_bq = bigquery.Client.from_service_account_json(CREDENTIALS_FILE)
@@ -88,4 +85,4 @@ job = client_bq.load_table_from_dataframe(
 
 job.result()
 
-print("🚀 Datos cargados exitosamente en BigQuery")
+print("Datos cargados exitosamente en BigQuery")

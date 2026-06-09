@@ -6,7 +6,6 @@ import dotenv
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
 load_dotenv(override=True)
 CONVOCATORIA_ECO = os.getenv("Sheets_JAE")
 
@@ -51,9 +50,7 @@ DF = DF.drop_duplicates(DF.columns)
 DF = DF.iloc[:, 0:51]
 DF['proyecto'] = "Jóvenes a la E"
 
-print(DF.info())
-print(DF)
-print(pd.DataFrame(DF.columns))
+print(DF.columns)
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 
@@ -61,7 +58,6 @@ table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
 
 from validacion_dataframes import validar_y_comparar
 
-print("Iniciando control de calidad de columnas")
 validar_y_comparar(Hoja_caracterizacion.title, DF, client_bq, table_ref)
 
 job = client_bq.load_table_from_dataframe(
