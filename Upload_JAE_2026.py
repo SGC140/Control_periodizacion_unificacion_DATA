@@ -58,7 +58,7 @@ DF[Columnas_tipo_FLOAT64] = DF[Columnas_tipo_FLOAT64].apply(pd.to_numeric, error
 
 DF['proyecto'] = "Jóvenes a la E"
 
-print(DF.columns)
+print(DF.columns.to_list())
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"

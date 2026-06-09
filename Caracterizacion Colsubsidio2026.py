@@ -64,7 +64,6 @@ df = df.astype(str)
 print(f"Número de Filas {len(df)}")
 print(df.columns.tolist())
 df['proyecto'] = 'Colsubsidio 2026' 
-print(df.head())
 
 client_bq = bigquery.Client.from_service_account_json(CREDENTIALS_FILE)
 

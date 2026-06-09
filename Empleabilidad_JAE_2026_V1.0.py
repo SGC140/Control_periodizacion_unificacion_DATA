@@ -58,7 +58,7 @@ print(DF[Columnas_int_float])
 
 DF['proyecto'] = "Jóvenes a la E"
 
-print(DF.columns)
+print(DF.columns.to_list())
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 

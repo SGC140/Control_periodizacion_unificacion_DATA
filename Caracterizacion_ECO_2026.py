@@ -46,7 +46,7 @@ DF.columns = (DF.columns
               )
 
 DF = DF.drop_duplicates(DF.columns)
-print(DF.columns)
+print(DF.columns.to_list())
 
 DF['proyecto'] = "Ecolombia 2.0"
 

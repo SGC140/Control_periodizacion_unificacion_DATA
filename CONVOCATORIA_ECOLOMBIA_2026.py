@@ -55,7 +55,7 @@ for columnas_fecha in DF.columns:
 DF = DF.iloc[:, 0:54]
 DF['proyecto'] = "Ecolombia 2.0"
 
-print(DF.columns)
+print(DF.columns.to_list())
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"

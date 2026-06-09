@@ -51,7 +51,7 @@ DF = DF.drop_duplicates(DF.columns)
 
 DF = DF.iloc[:, 0:32]
 DF['proyecto'] = "Ecolombia 2.0"
-print(DF.columns)
+print(DF.columns.to_list())
 
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)

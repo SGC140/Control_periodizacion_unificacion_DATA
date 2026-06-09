@@ -52,7 +52,7 @@ DF = DF.rename(columns={columna_larga: 'autorizacion_datos'})
 DF = DF.drop_duplicates(DF.columns)
 DF['proyecto'] = 'Suba es Oportunidad'
 
-print(pd.DataFrame(DF.columns))
+print(DF.columns.to_list())
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 

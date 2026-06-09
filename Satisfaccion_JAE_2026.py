@@ -47,8 +47,7 @@ DF.columns = (DF.columns
 DF = DF.drop_duplicates(DF.columns)
 
 DF['proyecto'] = "Jóvenes a la E"
-print(DF.info())
-print(DF.columns)
+print(DF.columns.to_list())
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"

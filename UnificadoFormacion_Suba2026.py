@@ -95,7 +95,7 @@ df['fecha_inicio'] = pd.to_datetime(df['fecha_inicio'])
 df['fecha_inicio'] = df['fecha_inicio'].dt.strftime('%d/%m/%Y')
 df['proyecto'] = 'Suba es Oportunidad'
 
-print(df.columns)
+print(df.columns.to_list())
 
 client_bq = bigquery.Client.from_service_account_json(CREDENTIALS_FILE)
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"

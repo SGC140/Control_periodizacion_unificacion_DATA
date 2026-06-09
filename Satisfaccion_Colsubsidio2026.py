@@ -61,8 +61,7 @@ if df.empty:
 
 df['proyecto'] = 'Colsubsidio 2026' 
 print(f"# Filas {len(df)}")
-print(df.columns)
-print(df.head())
+print(df.columns.to_list())
 
 
 client_bq = bigquery.Client.from_service_account_json(CREDENTIALS_FILE)

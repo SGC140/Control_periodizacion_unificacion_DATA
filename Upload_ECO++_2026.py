@@ -60,7 +60,7 @@ DF[Columnas_numericas] = DF[Columnas_numericas].apply(pd.to_numeric, errors='coe
 
 DF['proyecto'] = "Ecolombia 2.0"
 
-print(DF.columns)
+print(DF.columns.to_list())
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
