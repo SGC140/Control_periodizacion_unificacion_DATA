@@ -63,7 +63,6 @@ df = df.loc[:, ~df.columns.duplicated()]
 
 print(f" Número de filas: {len(df)}")
 print(df.columns.tolist())
-print(df.head())
 
 client_bq = bigquery.Client.from_service_account_json(CREDENTIALS_FILE)
 
