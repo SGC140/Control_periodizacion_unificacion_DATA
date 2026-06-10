@@ -68,10 +68,7 @@ df = df.drop(columns=['correo_de_la_empresa_2', 'correo_de_la_empresa_3', 'requi
 
 df = df.astype(str)
 df["total_remisiones"].apply(pd.to_numeric, errors='coerce')
-df["total_contratacion"].apply(pd.to_numeric, errors='coerce')
 
-
-print(f"# Filas{len(df)}")
 df['proyecto'] = 'Suba es Oportunidad'
 print(df.columns.tolist())
 
