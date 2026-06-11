@@ -54,7 +54,6 @@ for columna in DF.columns:
         Columnas_int_float.append(columna)
 
 DF[Columnas_int_float].apply(pd.to_numeric, errors='coerce').astype("Int64")
-print(DF[Columnas_int_float])
 
 DF['proyecto'] = "Jóvenes a la E"
 

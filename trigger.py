@@ -20,17 +20,23 @@ archivos_excluidos = ['trigger.py',
                       'Append_DATA_BQ.py'
                       ]
 
+script_prioridad = 'Mantenimiento_appends.py'
 
-scripts_ejecutables = []
+scripts_ejecutables = [script_prioridad]
 for script in scripts_listados:
-    if script not in archivos_excluidos:
+    if script not in archivos_excluidos and script != script_prioridad:
         scripts_ejecutables.append(script)
 
 print(f"Ejecutando los siguientes códigos: {scripts_ejecutables}. Total: {len(scripts_ejecutables)}")
 
+Barra = "="*60
 scrpits_fallidos = {}
 for script in scripts_ejecutables:
     try:
+        if script == script_prioridad:
+            print(f"{Barra}\nAPPEND\n{Barra}")
+
+        print(f"\n\nIniciando ejecución: {script}")
         subprocess.run([sys.executable, script], check=True)
         print(f"{script} ejecutado correctamente")
     except subprocess.CalledProcessError as error:

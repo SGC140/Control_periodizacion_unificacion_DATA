@@ -27,10 +27,14 @@ jobs:
             - name: Reconstruccion de credenciales
               env:
                  CREDENCIALES_JSON: ${{secrets.CREDENCIALES_GCP}}
+                 CLIENT_SECRETS_JSON: ${{secrets.CLIENT_SECRETS_JSON}}
+                 CREDENTIAL_MODULE_JSON: ${{secrets.CREDENTIAL_MODULE_JSON}}
                  VARIABLES_ENTORNO: ${{secrets.ARCHIVO_ENV}}
               run: |
                 echo "$CREDENCIALES_JSON" > credenciales.json
                 echo "$VARIABLES_ENTORNO" > .env
+                echo "$CLIENT_SECRETS_JSON" > client_secrets.json
+                echo "$CREDENTIAL_MODULE_JSON" > credentials_module.json
             
             - name: Ejecutar trigger
               run: python trigger.py

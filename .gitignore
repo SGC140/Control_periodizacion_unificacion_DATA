@@ -4,3 +4,6 @@ venv/
 .vscode/
 __pycache__/
 Formacion*.py
+client_secrets.json
+credentials_modules.json
+credentials_module.json

@@ -53,8 +53,6 @@ for columnas in DF.columns:
     if 'nota_modulo' in columnas or 'asistencias_modulo' in columnas or 'nota' in columnas or 'postulaciones' in columnas  or 'cantidad' in columnas:
         Columnas_numericas.append(columnas)
 
-print(pd.DataFrame(DF[Columnas_numericas].columns))
-
 DF[Columnas_numericas] = DF[Columnas_numericas].replace({',': '.'}, regex=True)
 DF[Columnas_numericas] = DF[Columnas_numericas].apply(pd.to_numeric, errors='coerce')
 
