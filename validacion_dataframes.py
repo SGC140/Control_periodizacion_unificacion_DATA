@@ -7,7 +7,8 @@ def validar_y_comparar(nombre_base_sheets, df, client_bq, table_ref):
         columnas_bq = [campo.name for campo in tabla_bq.schema]
     except NotFound:
         print(f"la tabla: {table_ref} no existe en el confunto de datos de BQ")
-        sys.exit(1)
+        print(f"saltando la validación y resubiendo la Tabla automáticamente")
+        return True
     
     columnas_df = list(df.columns)
     errores = False
