@@ -43,7 +43,7 @@ df = df.dropna(subset=['Número de documento'])
 df = df.replace(r'^\s*$', None, regex=True)
 
 cols_before = set(df.columns)
-df = df.dropna(axis=1, how='all')
+#df = df.dropna(axis=1, how='all')
 cols_after = set(df.columns)
 
 eliminadas = cols_before - cols_after
