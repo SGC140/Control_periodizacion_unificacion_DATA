@@ -29,6 +29,10 @@ data = sheet.get_all_values()
 
 headers = data[1]
 rows = data[2:]
+
+padded_rows = [row + [None] * (len(headers) - len(row)) for row in rows]
+df = pd.DataFrame(padded_rows, columns=headers)
+
 headers = [h if h != "" else f"col_{i}" for i, h in enumerate(headers)]
 num_cols = len(headers)
 
@@ -40,14 +44,11 @@ for row in rows:
     row = (row + [None] * num_cols)[:num_cols]
     rows_fixed.append(row)
 
-padded_rows = [row + [None] * (len(headers) - len(row)) for row in rows]
-df = pd.DataFrame(padded_rows, columns=headers)
-
 df = pd.DataFrame(rows_fixed, columns=headers)
 df = df.replace(r'^\s*$', None, regex=True)
 df = df.where(pd.notnull(df), None)
 df = df[df.notna().any(axis=1)]
-df = df.dropna(axis=1, how='all')
+#df = df.dropna(axis=1, how='all')
 
 df.columns = (
     df.columns
@@ -59,8 +60,8 @@ df.columns = (
 )
 
 df = df.loc[:, ~df.columns.duplicated()]
-if df.empty:
-    raise ValueError("❌ DataFrame vacío. Revisa estructura del Sheet.")
+#if df.empty:
+    #raise ValueError("❌ DataFrame vacío. Revisa estructura del Sheet.")
 
 df['proyecto'] = 'Colsubsidio 2.0 2026' 
 print(f"# Filas {len(df)}")
