@@ -38,7 +38,7 @@ df = pd.DataFrame(padded_rows, columns=headers)
 df = pd.DataFrame(rows, columns=headers)
 
 df = df.dropna(how="all")
-df = df.dropna(subset=['Numero de documento'])
+df = df.dropna(subset=['Número de documento'])
 
 df = df.replace(r'^\s*$', None, regex=True)
 
