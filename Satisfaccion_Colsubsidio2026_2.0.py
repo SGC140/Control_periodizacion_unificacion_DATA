@@ -50,14 +50,15 @@ df = df.where(pd.notnull(df), None)
 df = df[df.notna().any(axis=1)]
 #df = df.dropna(axis=1, how='all')
 
-df.columns = (
-    df.columns
-    .astype(str)
-    .str.strip()
-    .str.replace(" ", "_")
-    .str.replace(r"[^\w]", "", regex=True)
-    .str.lower()
-)
+df.columns = (df.columns
+              .str.replace(" ","_")
+              .str.normalize('NFKD')
+              .str.encode('ascii', errors='ignore')
+              .str.decode('utf-8')
+              .str.lower()
+              .str.replace(r"[\r\n]+", "", regex=True)
+              .str.replace(r"[^a-z0-9_#]", "", regex=True)              
+              )
 
 df = df.loc[:, ~df.columns.duplicated()]
 #if df.empty:
