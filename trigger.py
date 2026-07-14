@@ -17,7 +17,8 @@ archivos_excluidos = ['trigger.py',
                       'DashEco.py',
                       'validacion_dataframes.py',
                       'Limpieza_seguimiento.py',
-                      'Append_DATA_BQ.py'
+                      'Append_DATA_BQ.py',
+                      'colsu2.py'
                       ]
 
 script_prioridad = 'Mantenimiento_appends.py'
