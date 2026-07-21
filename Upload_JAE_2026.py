@@ -46,7 +46,7 @@ DF.columns = (DF.columns
               )
 
 DF = DF.iloc[:, 0:47]
-DF = DF.drop_duplicates(DF.columns)
+DF = DF.loc[:, ~DF.columns.duplicated()]
 
 Columnas_tipo_FLOAT64 = []
 for columna in DF.columns:

@@ -49,7 +49,7 @@ DF.columns = (DF.columns
 columna_larga = DF.columns[DF.columns.str.contains('autorizo', case=False)][0]
 DF = DF.rename(columns={columna_larga: 'autorizacion_datos'})
 
-DF = DF.drop_duplicates(DF.columns)
+DF = DF.loc[:, ~DF.columns.duplicated()]
 DF['proyecto'] = 'Suba es Oportunidad'
 
 print(DF.columns.to_list())

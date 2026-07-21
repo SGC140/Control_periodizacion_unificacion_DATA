@@ -46,7 +46,7 @@ DF.columns = (DF.columns
               .str.replace(r"[^a-z0-9_#]", "", regex=True)              
               )
 
-DF = DF.drop_duplicates(DF.columns)
+DF = DF.loc[:, ~DF.columns.duplicated()]
 
 Columnas_numericas = []
 for columnas in DF.columns:

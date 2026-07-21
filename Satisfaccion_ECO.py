@@ -34,7 +34,9 @@ DF = DF.loc[:, DF.columns != ""]
 DF = DF.replace(r'^\s*$', None, regex=True)
 DF = DF.where(pd.notnull(DF), None)
 
+
 DF = DF.dropna(subset=['Número de documento de identidad'])
+
 
 DF.columns = (DF.columns
               .str.replace(" ","_")
@@ -46,13 +48,12 @@ DF.columns = (DF.columns
               .str.replace(r"[^a-z0-9_#]", "", regex=True)              
               )
 
-DF = DF.drop_duplicates(DF.columns)
+DF = DF.loc[:, ~DF.columns.duplicated()]
 
 
 DF = DF.iloc[:, 0:32]
 DF['proyecto'] = "Ecolombia 2.0"
 print(DF.columns.to_list())
-
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"

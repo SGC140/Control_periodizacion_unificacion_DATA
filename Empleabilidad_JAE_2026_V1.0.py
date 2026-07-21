@@ -45,7 +45,7 @@ DF.columns = (DF.columns
               .str.replace(r"[\r\n]+", "", regex=True)
               .str.replace(r"[^a-z0-9_#]", "", regex=True)              
               )
-DF = DF.drop_duplicates(DF.columns)
+DF = DF.loc[:, ~DF.columns.duplicated()]
 DF = DF.iloc[:, 0:26]
 
 Columnas_int_float = []
