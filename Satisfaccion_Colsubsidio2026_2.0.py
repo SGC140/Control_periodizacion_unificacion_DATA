@@ -27,7 +27,7 @@ client_sheets = gspread.authorize(creds)
 sheet = client_sheets.open_by_key(SPREADSHEET_ID).worksheet("Satisfacción")
 data = sheet.get_all_values()
 
-headers = data[1]
+headers = data[0]
 rows = data[2:]
 
 padded_rows = [row + [None] * (len(headers) - len(row)) for row in rows]
