@@ -18,7 +18,10 @@ archivos_excluidos = ['trigger.py',
                       'validacion_dataframes.py',
                       'Limpieza_seguimiento.py',
                       'Append_DATA_BQ.py',
-                      'colsu2.py'
+                      'colsu2.py',
+                      'Caracterizacion Colsubsidio2026.py',
+                      'Satisfaccion_Colsubsidio2026.py',
+                      'Upload Colsubsidio2026.py',
                       ]
 
 script_prioridad = 'Mantenimiento_appends.py'
