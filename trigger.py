@@ -19,6 +19,7 @@ archivos_excluidos = ['trigger.py',
                       'Limpieza_seguimiento.py',
                       'Append_DATA_BQ.py',
                       'colsu2.py',
+                      'STC_3_0_FCS.py'
                       #'Caracterizacion Colsubsidio2026.py',
                       #'Satisfaccion_Colsubsidio2026.py',
                       #'Upload Colsubsidio2026.py',
