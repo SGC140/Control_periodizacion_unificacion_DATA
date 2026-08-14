@@ -41,6 +41,7 @@ DF[Columnas_numericas] = DF[Columnas_numericas].replace(",", ".", regex=True)
 DF[Columnas_numericas] = DF[Columnas_numericas].apply(pd.to_numeric, errors = 'coerce')
 
 Columnas_fecha = [columna for columna in DF.columns if 'fecha' in columna.lower().strip()]
+Columnas_fecha.append('Certificado')
 DF[Columnas_fecha] = DF[Columnas_fecha].apply(pd.to_datetime, errors='coerce')
 DF[Columnas_fecha] = DF[Columnas_fecha].apply(lambda x: x.dt.strftime('%d/%m/%Y'))
 
