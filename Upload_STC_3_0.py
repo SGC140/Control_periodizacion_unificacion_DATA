@@ -8,7 +8,7 @@ import os
 
 load_dotenv()
 load_dotenv(override=True)
-SEGUIMIENTO_STC = os.getenv("Respaldo_Sheets_STC_3_0")
+SEGUIMIENTO_STC = os.getenv("Sheets_STC_3_0")
 
 PROJECT_ID = os.getenv("PROJECT_ID")
 DATASET_ID = "EFE_2026"
@@ -35,15 +35,15 @@ DF = DF.replace(r'^\s*$', None, regex=True)
 DF = DF.where(pd.notnull(DF), None)
 DF = DF.dropna(subset=['CC Prospecto'])
 
-Columnas_numericas = ['CANTIDAD DE LOGS','TIEMPO DE LOGUEO','TIEMPO SINCRÓNICO','TOTAL TIEMPO CURSO','Número de horas', 'Fecha clases']
+Columnas_numericas = ['CANTIDAD DE LOGS','TIEMPO DE LOGUEO','TIEMPO SINCRÓNICO','TOTAL TIEMPO CURSO','Número de horas', '#', 'Tipo de paquete reportado']
 
 DF[Columnas_numericas] = DF[Columnas_numericas].replace(",", ".", regex=True) 
 DF[Columnas_numericas] = DF[Columnas_numericas].apply(pd.to_numeric, errors = 'coerce')
 
 Columnas_fecha = [columna for columna in DF.columns if 'fecha' in columna.lower().strip()]
 Columnas_fecha.append('Certificado')
-DF[Columnas_fecha] = DF[Columnas_fecha].apply(pd.to_datetime, errors='coerce')
-DF[Columnas_fecha] = DF[Columnas_fecha].apply(lambda x: x.dt.strftime('%d/%m/%Y'))
+DF[Columnas_fecha] = DF[Columnas_fecha].apply(pd.to_datetime, errors='coerce', dayfirst=True)
+DF[Columnas_fecha] = DF[Columnas_fecha].apply(lambda x: x.dt.strftime('%Y-%m-%d'))
 
 DF.columns = (DF.columns
               .str.replace(" ","_")
