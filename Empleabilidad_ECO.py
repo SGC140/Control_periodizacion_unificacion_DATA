@@ -47,7 +47,7 @@ DF.columns = (DF.columns
 
 Columnas_innecesarias = ['fomacion_dual', 'meses_en_letras', 'meses_practica'] 
 DF = DF.drop(columns=Columnas_innecesarias)
-DF = DF.iloc[:, 0:61]
+DF = DF.iloc[:, 0:62]
 DF = DF.loc[:, ~DF.columns.duplicated()]
 DF['proyecto'] = "Ecolombia 2.0"
 DF["total_postulaciones"].apply(pd.to_numeric, errors = 'coerce')
