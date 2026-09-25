@@ -26,8 +26,10 @@ scopes = [
 creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=scopes)
 client_sheets = gspread.authorize(creds)
 
-sheet = client_sheets.open_by_key(SPREADSHEET_ID).sheet1
+sheet = client_sheets.open_by_key(SPREADSHEET_ID).worksheet("SEGUIMIENTO GENERAL")
 data = sheet.get(RANGE)
+
+print(sheet)
 
 headers = data[0]
 rows = data[1:]
@@ -64,7 +66,7 @@ df.columns = [col if col != "" else f"col_{i}" for i, col in enumerate(df.column
 df = df.astype(str)
 
 df['proyecto'] = 'Colsubsidio 2.0 2026'
-df = df.drop(columns=['coincide_fecha_inicio'])
+df = df.drop(columns='coincide_fecha_inicio')
 print(df.columns.tolist())
 
 client_bq = bigquery.Client.from_service_account_json(CREDENTIALS_FILE)
