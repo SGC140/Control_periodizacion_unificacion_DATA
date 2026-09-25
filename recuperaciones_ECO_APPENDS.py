@@ -42,14 +42,35 @@ print(df)
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID_DESTINO}"
 
-job = client_bq.load_table_from_dataframe(
+query_fecha = client_bq.query(f"SELECT DISTINCT fecha_monitoreo FROM {table_ref} ORDER BY fecha_monitoreo DESC").to_dataframe()
+ultima_fecha = query_fecha["fecha_monitoreo"].iloc[0]
+
+validacion = ultima_fecha == fecha_registro
+
+if validacion:
+    df_historico = client_bq.query(f"SELECT * FROM {table_ref}").to_dataframe()
+    df_historico = df_historico[df_historico["fecha_monitoreo"].astype(str) != str(fecha_registro)]
+    df_final = pd.concat([df_historico, df], ignore_index=True)
+    job = client_bq.load_table_from_dataframe(
+    df_final,
+    table_ref,
+    job_config=bigquery.LoadJobConfig(
+        write_disposition="WRITE_TRUNCATE",
+        autodetect=True
+        )
+    )
+    job.result()
+    print("Actualización hoy Completada con Éxtio")
+
+else:
+    job = client_bq.load_table_from_dataframe(
     df,
     table_ref,
     job_config=bigquery.LoadJobConfig(
         write_disposition="WRITE_APPEND",
         autodetect=True
+        )
     )
-)
 
-job.result()
-print("Verificado")
+    job.result()
+    print("Agregación monitoreo diario completo")
