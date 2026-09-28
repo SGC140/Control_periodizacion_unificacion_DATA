@@ -3,6 +3,8 @@ name: Schedule Trigger Sheets to BQ
 on:
     schedule:
         - cron: '0 4 * * *'
+    
+    workflow_dispatch:
 
 
 jobs:
