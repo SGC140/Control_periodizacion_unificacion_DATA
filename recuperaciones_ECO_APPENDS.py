@@ -29,7 +29,12 @@ columnas_interes = ["documento", "id_sis", "gestor_asignado","novedad",
                     "cantidad_de_modulos_aprobados"]
 
 df = df[columnas_interes]
-df["estado_aprobacion"] = np.where(df["cantidad_de_modulos_aprobados"] != df["cantidad_de_modulos_cursados"], "Con Pendientes Académicos", "Al día")
+
+df['estado_aprobacion'] = np.where(
+    df["cantidad_de_modulos_cursados"] == 0, "Pendiente por Ingresar",
+    np.where(
+        df["cantidad_de_modulos_aprobados"] != df["cantidad_de_modulos_cursados"], 
+        "Con Pendientes Académicos", "Al día"))
 
 df['proyecto'] = "Ecolombia 2.0"
 
