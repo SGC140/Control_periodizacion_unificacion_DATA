@@ -9,11 +9,11 @@ import dateparser
 
 load_dotenv()
 load_dotenv(override=True)
-SEGUIMIENTO_ECO = os.getenv("Sheets_ECO")
+BASE_GENERAL = os.getenv("Sheets_JAE")
 
 PROJECT_ID = os.getenv("PROJECT_ID")
 DATASET_ID = "EFE_2026"
-TABLE_ID   = "VACANTES_PATROCINIO_ECOPLUS_2026"
+TABLE_ID   = "VACANTES_PATROCINIO_JAE_2026"
 
 Credentials_File = "credenciales.json"
 
@@ -25,7 +25,7 @@ scopes = [
 creds = Credentials.from_service_account_file(Credentials_File, scopes=scopes)
 client_sheets = gspread.authorize(creds)
 
-sheet = client_sheets.open_by_key(SEGUIMIENTO_ECO)
+sheet = client_sheets.open_by_key(BASE_GENERAL)
 Hoja_seguimiento = sheet.worksheet("VACANTES DE PATROCINIO")
 Datos = Hoja_seguimiento.get_all_values()
 DF = pd.DataFrame(Datos[1:], columns=Datos[0])
@@ -51,7 +51,7 @@ DF['fecha'] = DF['fecha'].apply(lambda x: x.strftime('%Y-%m-%d') if pd.notnull(x
 DF['fecha_de_contacto'] = pd.to_datetime(DF['fecha_de_contacto'], errors="coerce").dt.strftime('%Y-%m-%d')
 
 
-DF['proyecto'] = "Ecolombia 2.0"
+DF['proyecto'] = "Jóvenes a la E"
 
 print(DF.columns.to_list())
 print(DF.head())

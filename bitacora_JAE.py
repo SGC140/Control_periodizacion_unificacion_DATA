@@ -5,15 +5,14 @@ from google.cloud import bigquery
 import dotenv 
 from dotenv import load_dotenv
 import os
-import dateparser
 
 load_dotenv()
 load_dotenv(override=True)
-SEGUIMIENTO_ECO = os.getenv("Sheets_ECO")
+seguimiento = os.getenv("Sheets_JAE")
 
 PROJECT_ID = os.getenv("PROJECT_ID")
 DATASET_ID = "EFE_2026"
-TABLE_ID   = "VACANTES_PATROCINIO_ECOPLUS_2026"
+TABLE_ID   = "bitacora_JAE_2026"
 
 Credentials_File = "credenciales.json"
 
@@ -25,8 +24,8 @@ scopes = [
 creds = Credentials.from_service_account_file(Credentials_File, scopes=scopes)
 client_sheets = gspread.authorize(creds)
 
-sheet = client_sheets.open_by_key(SEGUIMIENTO_ECO)
-Hoja_seguimiento = sheet.worksheet("VACANTES DE PATROCINIO")
+sheet = client_sheets.open_by_key(seguimiento)
+Hoja_seguimiento = sheet.worksheet("Bitacoras")
 Datos = Hoja_seguimiento.get_all_values()
 DF = pd.DataFrame(Datos[1:], columns=Datos[0])
 Headers = DF.columns
@@ -45,16 +44,9 @@ DF.columns = (DF.columns
               .str.replace(r"[^a-z0-9_#]", "", regex=True)              
               )
 
-DF = DF.loc[:, ~DF.columns.duplicated()]
-DF['fecha'] = DF['fecha'].apply(lambda x: dateparser.parse(str(x)) if pd.notnull(x) else None)
-DF['fecha'] = DF['fecha'].apply(lambda x: x.strftime('%Y-%m-%d') if pd.notnull(x) else None)
-DF['fecha_de_contacto'] = pd.to_datetime(DF['fecha_de_contacto'], errors="coerce").dt.strftime('%Y-%m-%d')
-
-
-DF['proyecto'] = "Ecolombia 2.0"
+DF['proyecto'] = "Jóvenes a la E"
 
 print(DF.columns.to_list())
-print(DF.head())
 
 client_bq = bigquery.Client.from_service_account_json(Credentials_File)
 table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
@@ -66,7 +58,7 @@ job = client_bq.load_table_from_dataframe(
     DF,
     table_ref,
     job_config=bigquery.LoadJobConfig(
-        write_disposition="WRITE_APPEND",
+        write_disposition="WRITE_TRUNCATE",
         autodetect=True
     )
 )
