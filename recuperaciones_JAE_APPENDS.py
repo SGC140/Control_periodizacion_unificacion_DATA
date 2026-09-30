@@ -31,6 +31,8 @@ columnas_interes = ["doc", "id_sis", "gestor","estado",
 df = df[columnas_interes]
 
 df["cantidad_de_mod_aprobados"] = pd.to_numeric(df["cantidad_de_mod_aprobados"])
+fillna_columns = ["cantidad_de_mod_aprobados", "cantidad_de_modulos_cursados"]
+df[fillna_columns] = df[fillna_columns].fillna(0)
 
 df['estado_aprobacion'] = np.where(
     df["cantidad_de_modulos_cursados"] == 0, "Pendiente por Ingresar",
