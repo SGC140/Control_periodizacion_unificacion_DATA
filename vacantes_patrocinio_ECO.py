@@ -66,7 +66,7 @@ job = client_bq.load_table_from_dataframe(
     DF,
     table_ref,
     job_config=bigquery.LoadJobConfig(
-        write_disposition="WRITE_APPEND",
+        write_disposition="WRITE_TRUNCATE",
         autodetect=True
     )
 )
